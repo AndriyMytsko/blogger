@@ -1,0 +1,41 @@
+.message-bubble
+{
+    padding: 10px 0px 10px 0px;
+}
+
+.message-bubble:nth-child(even) { background-color: #F5F5F5; }
+
+.message-bubble > *
+{
+    padding-left: 10px;
+}
+
+.panel-body { padding: 0px; }
+
+.panel-heading {
+    height: 5pc;
+    background-color: #3d6da7 !important; color: white !important; }
+
+.connect {
+    background-color: #4CAF50;
+    margin-left: 15px;
+    margin-top: 10px;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.disconnect {
+    background-color: #f44336;;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
