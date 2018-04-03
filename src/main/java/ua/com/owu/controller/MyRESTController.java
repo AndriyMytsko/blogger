@@ -10,22 +10,22 @@ import java.util.List;
 
 @RestController
 public class MyRESTController {
-    @Autowired
-    CommentService commentService;
-    @Autowired
-    private UserService userService;
-
-    @PostMapping("/saveComment")
-    public Comment saveCommentREST(@RequestBody Comment comment){
+//    @Autowired
+//    CommentService commentService;
+//    @Autowired
+//    private UserService userService;
+//
+//    @PostMapping("/saveComment")
+//    public Comment saveCommentREST(@RequestBody Comment comment){
 //        User user = userService.findByName(principal.getName());
 //        post.setUser(user);
-        commentService.save(comment);
-        return comment;
-    }
-
-    @GetMapping("/show")
-    public List<Comment> show(){
-        return commentService.findAll();
-    }
+//        commentService.save(comment);
+//        return comment;
+//    }
+//
+//    @GetMapping("/show")
+//    public List<Comment> show(){
+//        return commentService.findAll();
+//    }
 
 }

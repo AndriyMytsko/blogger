@@ -6,11 +6,11 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-import ua.com.owu.editor.BlogEditor;
-import ua.com.owu.entity.Blog;
+import ua.com.owu.editor.PostEditor;
+import ua.com.owu.entity.Post;
 import ua.com.owu.entity.Comment;
 import ua.com.owu.entity.User;
-import ua.com.owu.service.BlogService;
+import ua.com.owu.service.PostService;
 import ua.com.owu.service.CommentService;
 import ua.com.owu.service.UserService;
 
@@ -22,18 +22,18 @@ public class CommentController {
     @Autowired
     private CommentService commentService;
     @Autowired
-    UserService userService;
+    private UserService userService;
     @Autowired
-    private BlogService blogService;
+    private PostService postService;
     @Autowired
-    private BlogEditor blogEditor;
+    private PostEditor postEditor;
 
-    public void setBlogEditor(BlogEditor blogEditor) {
-        this.blogEditor = blogEditor;
+    public void setPostEditor(PostEditor postEditor) {
+        this.postEditor = postEditor;
     }
 
-    public void setBlogService(BlogService blogService) {
-        this.blogService = blogService;
+    public void setPostService(PostService postService) {
+        this.postService = postService;
     }
 
     public void setCommentService(CommentService commentService) {
@@ -42,27 +42,26 @@ public class CommentController {
 
     @GetMapping("/createComment")
     public String createComment(Model model) {
-        model.addAttribute("blogs", blogService.findAll());
         return "createCommentPage";
     }
 
-    @ModelAttribute("emptyComment")
-    public Comment comment() {
-        return new Comment();
-    }
-
     @PostMapping("/saveComment")
-    public String saveComment(@ModelAttribute("emptyComment") Comment comment,Blog blog, BindingResult result, Principal principal) {
+    public String saveComment(@ModelAttribute("emptyComment") Comment comment, Post post, BindingResult result, Principal principal) {
         User user = userService.findByName(principal.getName());
         comment.setUser(user);
-//        comment.setBlog();
         commentService.save(comment);
+        return "redirect:/";
+    }
+
+    @GetMapping(value="deleteComment-{id}")
+    public String deleteComment(@PathVariable int id, Model model) {
+        Comment  comment = commentService.findOne(id);
+        commentService.delete(id);
         return "redirect:/";
     }
 
     @InitBinder
     public void initBinder(WebDataBinder webDataBinder) {
-        webDataBinder.registerCustomEditor(Blog.class, blogEditor);
+        webDataBinder.registerCustomEditor(Post.class, postEditor);
     }
-
 }

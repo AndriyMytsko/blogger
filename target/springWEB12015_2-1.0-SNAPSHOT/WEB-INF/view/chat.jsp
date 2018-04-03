@@ -1,12 +1,9 @@
 <%@include file="templates/header.jsp"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<script src="/resources/sockjs-0.3.4.js"></script>
-<script src="/resources/stomp.js"></script>
-<link href="style/chat.css" rel="stylesheet" type="text/css" >
-
-
 <div class="w3-container w3-content" style="max-width:1900px;margin-top:80px">
+
+
     <!-- The Grid -->
     <div class="w3-row">
         <!-- Left Column -->
@@ -23,7 +20,7 @@
             <!-- Accordion -->
             <div class="w3-card-2 w3-round">
                 <div class="w3-white">
-                    <a href="/blog/createBlog" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-calendar-check-o fa-fw w3-margin-right"></i> Create Blogs</a>
+                    <a href="/post/createPost" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-calendar-check-o fa-fw w3-margin-right"></i> Create Post</a>
                     <button class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-users fa-fw w3-margin-right"></i> My Photos</button>
                     <div class="w3-hide w3-container">
                         <div class="w3-row-padding">
@@ -54,44 +51,37 @@
 
         <!-- Middle Column -->
         <div class="w3-col m7">
+
             <div class="w3-container w3-card-2 w3-white w3-round w3-margin">
                 <br>
 
-                <div class="container">
-                    <div class="row">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <button class="connect" id="connect" onclick="connect()">Connect</button>
-                                <button class="disconnect" id="disconnect" disabled="disabled" onclick="disconnect()">Disconnect</button>
-                            </div>
-                            <div class="panel-body">
+                <div class="panel-heading">
+                    <span class="glyphicon glyphicon-comment"></span> Chat
+                </div>
+                <br>
+                <button class="btn btn-primary active" id="connect" onclick="connect()">Connect</button>
+                <button class="btn btn-primary" disabled id="disconnect"  onclick="disconnect()">Disconnect</button>
 
-                                <div class="row message-bubble">
-                                    <h4>Мій чат!</h4>
-                                </div>
-
-                                <div class="row message-bubble">
-                                    <p id="response"></p>
-                                </div>
-                                <div class="panel-footer">
-                                    <div class="input-group" id="conversationDiv">
-                                        <input type="text" class="form-control" id="name">
-                                        <span class="input-group-btn">
-                    <button class="btn btn-default" type="button" id="sendName" onclick="sendName()">send name</button>
-                  </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="w3-container">
+                    <br>
+                    <ul>
+                        <p id="response"></p>
+                    </ul>
                 </div>
 
-                <!-- End Middle Column -->
+                <div class="panel-footer">
+                    <div class="input-group" id="conversationDiv">
+                        <input id="name" type="text" class="form-control input-sm" placeholder="Type your message here..." />
+                        <span class="input-group-btn">
+                            <button class="btn btn-warning btn-sm" id="sendName" onclick="sendName()">
+                                Send</button>
+                        </span>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
 
-    <!-- End Page Container -->
+    </div>
 </div>
 
 <script>
@@ -129,6 +119,10 @@
         var name = document.getElementById("name").value;
         stompClient.send("/app/hello", {},JSON.stringify({'name':name}));
     }
+
+    $(() => {
+        this.connect();
+    });
 </script>
 
 <br>

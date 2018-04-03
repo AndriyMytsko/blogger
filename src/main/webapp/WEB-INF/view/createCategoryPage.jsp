@@ -1,3 +1,4 @@
+
 <%@include file="templates/header.jsp"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
@@ -18,7 +19,7 @@
             <!-- Accordion -->
             <div class="w3-card-2 w3-round">
                 <div class="w3-white">
-                    <a href="/blog/createBlog" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-calendar-check-o fa-fw w3-margin-right"></i> Create Blogs</a>
+                    <a href="/post/createPost" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-calendar-check-o fa-fw w3-margin-right"></i> Create Blogs</a>
                     <button class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-users fa-fw w3-margin-right"></i> My Photos</button>
                     <div class="w3-hide w3-container">
                         <div class="w3-row-padding">
@@ -55,13 +56,10 @@
                     <div class="w3-card-2 w3-round w3-white">
                         <div class="w3-container w3-padding">
                             <h6 class="w3-opacity"></h6>
-                            <sf:form action="/blog/saveBlog" method="post" modelAttribute="emptyBlog" enctype="multipart/form-data">
-                                <sf:input class="w3-border w3-padding" path="title"/>
-                                <br>
-                                <sf:errors path="title"/>
-                                <br>
-                                <sf:input path="descript"/>
-                                <input type="file" name="file" class="btn btn-primary btn-block btn-large">
+                            <%--@elvariable id="emptyCategory" type=""--%>
+                            <sf:form action="/category/saveCategory" method="post" modelAttribute="emptyCategory" enctype="multipart/form-data">
+                                <sf:input class="w3-border w3-padding" path="name"/>
+
                                 <input type="submit" class="btn btn-primary btn-block btn-large">
                             </sf:form>
                         </div>
@@ -91,5 +89,4 @@
     <br>
 
 
-<%@include file="templates/footer.jsp"%>
-
+    <%@include file="templates/footer.jsp"%>

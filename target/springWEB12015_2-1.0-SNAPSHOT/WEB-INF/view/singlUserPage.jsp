@@ -50,21 +50,21 @@
 
         <!-- Middle Column -->
             <div class="w3-col m7">
-                <c:forEach items="${blogs}" var="blog">
+                <c:forEach items="${posts}" var="post">
                     <div class="w3-container w3-card-2 w3-white w3-round w3-margin">
                         <br>
-                        <img src="${blog.user.avatar}" class="w3-left w3-circle w3-margin-right" style="width:60px" alt="Avatar">
+                        <img src="${post.user.avatar}" class="w3-left w3-circle w3-margin-right" style="width:60px" alt="Avatar">
                         <span class="w3-right w3-opacity"><%= new java.util.Date() %></span>
-                        <h4>${blog.user.username}</h4>
+                        <h4>${post.user.username}</h4>
                         <br>
                         <hr class="w3-clear">
-                        <h3>${blog.title}</h3>
-                        <img src="${blog.avatar}" style="width:50%" class="w3-margin-bottom">
-                        <h4>${blog.descript}</h4>
+                        <h3>${post.title}</h3>
+                        <img src="${post.avatar}" style="width:50%" class="w3-margin-bottom">
+                        <h4>${post.descript}</h4>
 
                         <form>
                             <input type="button" class="w3-button w3-theme-d2 w3-margin-bottom"  value="Коментувати" onClick='location.href="/post/createPost"'>
-                            <input type="button" class="w3-button w3-theme-d2 w3-margin-bottom"  value="Переглянути" onClick='location.href="/blog/showBlog-${blog.id}"'>
+                            <input type="button" class="w3-button w3-theme-d2 w3-margin-bottom"  value="Переглянути" onClick='location.href="/post/showPost-${post.id}"'>
                         </form>
                     </div>
                 </c:forEach>

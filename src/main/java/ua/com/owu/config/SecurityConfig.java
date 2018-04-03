@@ -43,19 +43,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth
                 .inMemoryAuthentication()
-                .withUser("c").password("c").roles("ADMIN");
+                .withUser("admin").password("admin").roles("ADMIN");
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
         http.csrf().disable().authorizeRequests()
-                .antMatchers( "/registration**").permitAll()
+                .antMatchers("/registration**").permitAll()
                 .antMatchers("/").fullyAuthenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
                 .defaultSuccessUrl("/", false)
+//                .successForwardUrl("/asdasda")
                 .permitAll()
                 .and()
                 .logout()

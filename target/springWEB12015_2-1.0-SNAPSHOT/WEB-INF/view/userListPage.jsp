@@ -1,5 +1,6 @@
 <%@include file="templates/header.jsp"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<sec:authentication property="principal" var="currentUser" />
 
 <div class="w3-container w3-content" style="max-width:1900px;margin-top:80px">
     <!-- The Grid -->
@@ -49,11 +50,22 @@
 
         <!-- Middle Column -->
         <div class="w3-col m7">
-                <c:forEach items="${userList}" var="user">
-                    <div class="w3-container w3-card-2 w3-white w3-round w3-margin">
-                    <p><a href="show-${user.id}">${user.username}</a></p>
-                    <p><img src="${user.avatar}" class="w3" style="height:210px;width:190px" alt="Avatar"></p>
+
+            <c:forEach items="${userList}" var="user">
+            <div class="w3-container">
+                <ul class="w3-ul w3-card-4">
+                    <li class="w3-bar">
+                        <img src="${user.avatar}" class="w3-bar-item w3-circle w3-hide-small" style="width:105px">
+                        <div class="w3-bar-item">
+                            <span class="w3-large"><a href="show-${user.id}">${user.username}</a></span>
+                        </div>
+                        <c:if test = "${currentUser.roles == 'ROLE_ADMIN'}">
+                            <button class="w3-margin-bottom w3-right" onClick='location.href="deleteUser-${user.id}"'><i class="fa fa-close"></i></button>
+                        </c:if>
+                    </li>
+                </ul>
             </div>
+                <br>
             </c:forEach>
         </div>
 

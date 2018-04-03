@@ -11,4 +11,10 @@ public interface CommentService {
     List<Comment> findAll();
 
     void save(Comment comment);
+
+    List<Comment> findCommentOfCurrentCategory(int categoryID);
+
+    Comment delete(int id);
+
+
 }

@@ -1,6 +1,6 @@
 <%@include file="templates/header.jsp"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<sec:authentication property="principal" var="user" />
 
 <body class="w3-theme-l5">
 
@@ -54,48 +54,48 @@
         <div class="w3-col m7">
 
             <div class="w3-container w3-card-2 w3-white w3-round w3-margin"><br>
-                <img src="${blog.user.avatar}" class="w3-circle" style="width:60px" alt="Avatar">
-                <p>Имя : ${blog.user.username}</p>
+                <c:if test = "${user.roles == 'ROLE_ADMIN'}">
+                    <button class="w3-margin-bottom w3-right" onClick='location.href="/post/deletePost-${post.id}"'><i class="fa fa-close"></i></button>
+                </c:if>
+                <img src="${post.user.avatar}" class="w3-circle" style="width:60px" alt="Avatar">
+                <p>Имя : ${post.user.username}</p>
+
+                <span class="w3-opacity">${post.date}</span>
                 <hr class="w3-clear">
                 <br>
-                <p>${blog.title}</p>
-                <img src="${blog.avatar}"  style="width:30%" class="w3-margin-bottom">
-                <p>${blog.descript}</p>
+                <p>${post.title}</p>
+                <img src="${post.avatar}" style="width:85%; cursor:pointer" onclick="onClick(this)" class="w3-hover-opacity">
+                <p>${post.descript}</p>
 
-                <br>
-
-                <%--<input type="text" name="post" id="add-post">--%>
-
-                <%--<button id="save">save</button>--%>
-                <%--<div id="showDIV"></div>--%>
                 <br>
                 <sf:form action="/comment/saveComment" method="post" modelAttribute="emptyComment">
-                    <sf:textarea path="comment"/>
+                    <sf:textarea class="form-control" path="comment" required="required"/>
                     <br>
-                    <sf:select type="hidden" path="blog">
-                            <sf:option type="hidden" value="${blog.id}"></sf:option>
+                    <sf:select  path="post">
+                        <sf:option value="${post.id}"></sf:option>
                     </sf:select>
                     <br>
                     <button type="submit" class="w3-button w3-theme"><i class="fa fa-pencil"></i>Додати</button>
                 </sf:form>
 
-                <c:forEach items="${comments}" var="comment">
-
                     <br>
 
+                <c:forEach items="${comments}" var="comment">
+                    <hr>
+                    <c:if test = "${user.roles == 'ROLE_ADMIN'}">
+                        <button class="w3-margin-bottom w3-right" onClick='location.href="/comment/deleteComment-${comment.id}"'><i class="fa fa-close"></i></button>
+                    </c:if>
                     <div class="media">
                         <div class="media-left">
                             <img src="${comment.user.avatar}" class="media-object" style="width:45px">
                         </div>
+
                         <div class="media-body">
                             <h4 class="media-heading">${comment.user.username}  <small><i>${comment.date}</i></small></h4>
                             <p>${comment.comment}</p>
                         </div>
                     </div>
-                    <br>
-
                 </c:forEach>
-
 
             </div>
         </div>

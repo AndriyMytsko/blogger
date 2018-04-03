@@ -31,6 +31,17 @@ public class CommentServiceImpl implements CommentService {
         }
     }
 
+    @Override
+    public List<Comment> findCommentOfCurrentCategory(int categoryID) {
+        return commentDAO.postWithComment(categoryID);
+    }
+
+    @Override
+    public Comment delete(int id) {
+        commentDAO.delete(id);
+        return null;
+    }
+
     public Comment findOne(int id) {
         return commentDAO.findOne(id);
     }

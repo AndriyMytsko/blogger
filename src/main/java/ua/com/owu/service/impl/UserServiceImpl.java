@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService,UserDetailsService {
 
     }
     public void delete(int id) {
-
+        userDAO.delete(id);
     }
 
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

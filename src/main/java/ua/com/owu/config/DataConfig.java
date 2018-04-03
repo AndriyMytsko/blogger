@@ -21,41 +21,41 @@ import java.util.Properties;
 
 public class DataConfig {
 
-    @Bean
-    public DataSource dataSource(){
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/new_schema");
-        dataSource.setUsername("root");
-        dataSource.setPassword("root");
-        return dataSource;
-    }
+@Bean
+public DataSource dataSource(){
+    DriverManagerDataSource dataSource = new DriverManagerDataSource();
+    dataSource.setDriverClassName("com.mysql.jdbc.Driver");
+    dataSource.setUrl("jdbc:mysql://localhost:3306/db_blog");
+    dataSource.setUsername("root");
+    dataSource.setPassword("root");
+    return dataSource;
+}
 
-    @Bean
-    public JpaVendorAdapter vendorAdapter(){
-        HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-        vendorAdapter.setDatabase(Database.MYSQL);
-        vendorAdapter.setShowSql(true);
-        return vendorAdapter;
-    }
+@Bean
+public JpaVendorAdapter vendorAdapter(){
+    HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+    vendorAdapter.setDatabase(Database.MYSQL);
+    vendorAdapter.setShowSql(true);
+    return vendorAdapter;
+}
 
-    @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory(){
+@Bean
+public LocalContainerEntityManagerFactoryBean entityManagerFactory(){
 
-        LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
-        factoryBean.setJpaVendorAdapter(vendorAdapter());
-        factoryBean.setDataSource(dataSource());
-        factoryBean.setPackagesToScan("ua.com.owu.entity");
+    LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
+    factoryBean.setJpaVendorAdapter(vendorAdapter());
+    factoryBean.setDataSource(dataSource());
+    factoryBean.setPackagesToScan("ua.com.owu.entity");
 
-        Properties properties = new Properties();
-        properties.setProperty("hibernate.hbm2ddl.auto", "update");
-        factoryBean.setJpaProperties(properties);
-        return factoryBean;
+    Properties properties = new Properties();
+    properties.setProperty("hibernate.hbm2ddl.auto", "update");
+    factoryBean.setJpaProperties(properties);
+    return factoryBean;
 
-    }
-    @Bean
-    public JpaTransactionManager transactionManager(EntityManagerFactory factory){
-        JpaTransactionManager jpaTransactionManager = new JpaTransactionManager(factory);
-        return jpaTransactionManager;
-    }
+}
+@Bean
+public JpaTransactionManager transactionManager(EntityManagerFactory factory){
+    JpaTransactionManager jpaTransactionManager = new JpaTransactionManager(factory);
+    return jpaTransactionManager;
+}
 }

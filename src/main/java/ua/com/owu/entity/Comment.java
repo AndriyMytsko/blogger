@@ -1,8 +1,5 @@
 package ua.com.owu.entity;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import ua.com.owu.service.UserService;
-
 import javax.persistence.*;
 import java.util.Date;
 
@@ -11,12 +8,13 @@ public class Comment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
     private int id;
     private String comment;
     private Date date = new Date();
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE})
-    private Blog blog;
+    private Post post;
 
 
     @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
@@ -46,9 +44,9 @@ public class Comment {
         this.comment = comment;
     }
 
-    public Comment(String comment, Blog blog) {
+    public Comment(String comment, Post post) {
         this.comment = comment;
-        this.blog = blog;
+        this.post = post;
     }
 
     public String getComment() {
@@ -59,12 +57,12 @@ public class Comment {
         this.comment = comment;
     }
 
-    public Blog getBlog() {
-        return blog;
+    public Post getPost() {
+        return post;
     }
 
-    public void setBlog(Blog blog) {
-        this.blog = blog;
+    public void setPost(Post post) {
+        this.post = post;
     }
 
     public int getId() {
@@ -78,12 +76,12 @@ public class Comment {
 
     @Override
     public String toString() {
-        String blog = "";
-        if (this.blog != null) blog = blog.toString();
+        String post = "";
+        if (this.post != null) post = post.toString();
         return "Comment{" +
                 "id=" + id +
                 ", comment='" + comment + '\'' +
-                ", blog='" + blog + '\'' +
+                ", post='" + post + '\'' +
                 '}';
     }
 }
