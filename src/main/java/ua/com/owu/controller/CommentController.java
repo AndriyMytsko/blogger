@@ -11,6 +11,7 @@ import ua.com.owu.entity.Post;
 import ua.com.owu.entity.Comment;
 import ua.com.owu.entity.User;
 import ua.com.owu.service.PostService;
+import ua.com.owu.service.CategoryService;
 import ua.com.owu.service.CommentService;
 import ua.com.owu.service.UserService;
 
@@ -19,6 +20,8 @@ import java.security.Principal;
 @Controller
 @RequestMapping("/comment")
 public class CommentController {
+    @Autowired
+    private CategoryService categoryService;
     @Autowired
     private CommentService commentService;
     @Autowired
@@ -54,13 +57,12 @@ public class CommentController {
     }
 
     @GetMapping(value="deleteComment-{id}")
-    public String deleteComment(@PathVariable int id, Model model) {
-        Comment  comment = commentService.findOne(id);
+    public String deleteComment(@PathVariable int id) {
         commentService.delete(id);
         return "redirect:/";
     }
 
-    @InitBinder
+    @InitBinder("emptyComment")
     public void initBinder(WebDataBinder webDataBinder) {
         webDataBinder.registerCustomEditor(Post.class, postEditor);
     }

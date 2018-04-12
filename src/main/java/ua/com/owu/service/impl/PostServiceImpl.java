@@ -38,8 +38,12 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public Post delete(int id) {
+    public List<Post> findPostOfCurrentUser(int userID) {
+        return postDAO.postWithUser(userID);
+    }
+
+    @Override
+    public void delete(int id) {
         postDAO.delete(id);
-        return null;
     }
 }

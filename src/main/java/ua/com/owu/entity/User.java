@@ -1,14 +1,10 @@
 package ua.com.owu.entity;
 
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotEmpty;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
-
 import javax.persistence.*;
-import javax.validation.constraints.Size;
 import java.util.*;
 
 @Entity
@@ -17,10 +13,8 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Size(min=2, max=30)
     private String username;
     private String password;
-    @NotEmpty @Email
     private String email;
     private String avatar;
 
@@ -32,8 +26,11 @@ public class User implements UserDetails {
     private boolean credentialsNonExpired = true;
     private boolean enabled = true;
 
-    @OneToMany(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY,mappedBy = "user")
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, fetch = FetchType.LAZY, mappedBy = "user")
     private Set<Post> posts = new HashSet<Post>();
+
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, fetch = FetchType.LAZY, mappedBy = "user")
+    private Set<Message> message = new HashSet<Message>();
 
     @OneToMany(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY,mappedBy = "user")
     private Set<Comment> comments = new HashSet<Comment>();
@@ -148,6 +145,22 @@ public class User implements UserDetails {
 
     public void setPosts(Set<Post> posts) {
         this.posts = posts;
+    }
+
+    public Set<Message> getMessage() {
+        return message;
+    }
+
+    public void setMessage(Set<Message> message) {
+        this.message = message;
+    }
+
+    public Set<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(Set<Comment> comments) {
+        this.comments = comments;
     }
 
     public boolean isAdmin(){

@@ -18,7 +18,7 @@
         <input type="text" name="email" placeholder="Email" required="required" />
         <input type="file" name="file" class="btn btn-primary btn-block btn-large" value="Додати зображення"/>
         <br>
-        <button type="submit" class="btn btn-primary btn-block btn-large">Ввійти</button>
+        <button type="submit" class="btn btn-primary btn-block btn-large">Зберегти</button>
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
     </form>
 </div>

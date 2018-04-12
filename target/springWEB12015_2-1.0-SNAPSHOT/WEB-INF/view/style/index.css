@@ -54,3 +54,6 @@ img{
 h1,h2,h3,h4,h5,h6,p {
     font-style: oblique
 }
+.w3-myfont {
+    font-family: "Comic Sans MS", cursive, sans-serif;
+}

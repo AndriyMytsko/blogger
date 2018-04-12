@@ -14,7 +14,7 @@ public interface CommentService {
 
     List<Comment> findCommentOfCurrentCategory(int categoryID);
 
-    Comment delete(int id);
+    void delete(int id);
 
 
 }

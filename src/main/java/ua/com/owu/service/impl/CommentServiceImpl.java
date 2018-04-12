@@ -37,9 +37,8 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public Comment delete(int id) {
+    public void delete(int id) {
         commentDAO.delete(id);
-        return null;
     }
 
     public Comment findOne(int id) {
@@ -49,6 +48,7 @@ public class CommentServiceImpl implements CommentService {
     public List<Comment> findAll() {
         return commentDAO.findAll();
     }
+
 
 
 }

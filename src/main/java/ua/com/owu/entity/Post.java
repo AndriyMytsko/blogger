@@ -15,7 +15,7 @@ public class Post {
     private int id;
     private String title;
     private String descript;
-    private String avatar;
+    private String images;
     private Date date = new Date();
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "post", cascade = CascadeType.ALL)
@@ -25,6 +25,7 @@ public class Post {
     @JoinColumn(name = "user_id")
     private User user;
 
+
     @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id")
     private Category category;
@@ -32,10 +33,10 @@ public class Post {
     public Post() {
     }
 
-    public Post(String title, String descript, String avatar, Date date, List<Comment> comments, User user, Category category) {
+    public Post(String title, String descript, String images, Date date, List<Comment> comments, User user, Category category) {
         this.title = title;
         this.descript = descript;
-        this.avatar = avatar;
+        this.images = images;
         this.date = date;
         this.comments = comments;
         this.user = user;
@@ -66,12 +67,12 @@ public class Post {
         this.descript = descript;
     }
 
-    public String getAvatar() {
-        return avatar;
+    public String getImages() {
+        return images;
     }
 
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
+    public void setImages(String images) {
+        this.images = images;
     }
 
     public Date getDate() {
@@ -112,7 +113,7 @@ public class Post {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", descript='" + descript + '\'' +
-                ", avatar='" + avatar + '\'' +
+                ", images='" + images + '\'' +
                 ", date=" + date +
                 '}';
     }

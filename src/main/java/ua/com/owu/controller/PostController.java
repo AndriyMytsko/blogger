@@ -54,13 +54,13 @@ public class PostController {
     public String showPost(@PathVariable int id, Model model, Comment comment, Category category) {
         Post post = postService.findOne(id);
         model.addAttribute("comments", commentService.findCommentOfCurrentCategory(id));
+        model.addAttribute("categorise", categoryService.findAll());
         model.addAttribute("post", post);
         return "postPage";
     }
 
     @GetMapping(value="deletePost-{id}")
-    public String deletePost(@PathVariable int id, Model model) {
-        Post post = postService.findOne(id);
+    public String deletePost(@PathVariable int id) {
         postService.delete(id);
         return "redirect:/";
     }
@@ -70,13 +70,13 @@ public class PostController {
                        @RequestParam("file") MultipartFile multipartFile) {
         User user = userService.findByName(principal.getName());
         System.out.println(post);
-        String realPath = System.getProperty("user.home") + File.separator + "upload\\";
+        String realPath = System.getProperty("user.home") + File.separator + "images\\";
         try {
             multipartFile.transferTo(new File(realPath + multipartFile.getOriginalFilename()));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        post.setAvatar("\\avatar\\" + multipartFile.getOriginalFilename());
+        post.setImages("\\images\\" + multipartFile.getOriginalFilename());
         post.setUser(user);
         postService.save(post);
         return "redirect:/";

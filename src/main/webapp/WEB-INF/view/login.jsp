@@ -10,29 +10,22 @@
 
 </head>
 
-<script>
-    //    $(function () {
-    //        var token = $("meta[name='_csrf']").attr("content");
-    //        var header = $("meta[name='_csrf_header']").attr("content");
-    //        $(document).ajaxSend(function(e, xhr, options) {
-    //            xhr.setRequestHeader(header, token);
-    //        });
-    //    });
-</script>
 
 <body>
 
 <div class="login">
     <h1>Вхід</h1>
     <form action="/login" method="post">
-        <input type="text" name="username" placeholder="Username" required="required" />
-        <input type="password" name="password" placeholder="Password" required="required" />
+        <input type="text" name="username" placeholder="Username" required="required"/>
+        <input type="password" name="password" placeholder="Password" required="required"/>
         <button type="submit" class="btn btn-primary btn-block btn-large">Ввійти</button>
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
     </form>
     <div class="w3-card-2 w3-round">
         <div class="w3-white">
-            <button type="button" class="btn btn-primary btn-block btn-large" onClick='location.href="/registration"'>Зареєструватися</button>
+            <button type="button" class="btn btn-primary btn-block btn-large" onClick='location.href="/registration"'>
+                Зареєструватися
+            </button>
         </div>
     </div>
 

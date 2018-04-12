@@ -14,7 +14,9 @@ public interface PostService {
 
     List<Post> findPostOfCurrentCategory(int categoryID);
 
-    Post delete(int id);
+    List<Post> findPostOfCurrentUser(int userID);
+
+    void delete(int id);
 
 
 }

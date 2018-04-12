@@ -8,6 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import ua.com.owu.entity.Category;
+import ua.com.owu.entity.Comment;
+import ua.com.owu.entity.Post;
 import ua.com.owu.entity.User;
 import ua.com.owu.models.Greeting;
 import ua.com.owu.models.HelloMessage;
@@ -31,6 +34,8 @@ public class MainController {
     private PostService postService;
     @Autowired
     private CommentService commentService;
+    @Autowired
+    private MessageServise messageServise;
 
     @GetMapping("/")
     public String index(Model model,Principal principal) {
@@ -40,7 +45,8 @@ public class MainController {
     }
 
     @GetMapping("/chat")
-    public String chat() {
+    public String chat(Model model , Category category) {
+        model.addAttribute("categorise", categoryService.findAll());
         return "chat";
     }
 
@@ -69,7 +75,6 @@ public class MainController {
         mailService.send(user);
         return "login";
     }
-
 
     @GetMapping("login")
     public String login() {

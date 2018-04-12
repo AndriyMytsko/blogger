@@ -13,4 +13,7 @@ public interface CategoryService {
 
     Category findByName(String name);
 
+    void delete(int id);
+
+
 }
